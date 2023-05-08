@@ -4,12 +4,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Parking.Shared.Entities
+namespace Parking.Shared.DTOs
 {
-    public class Parking
+    public class PaginationDTO
     {
         public int Id { get; set; }
-        public DateTime TimeParking { get; set; }
-        public Boolean Status { get; set; }
+
+        public int Page { get; set; } = 1;
+
+        public int RecordsNumber { get; set; } = 10;
     }
+
 }

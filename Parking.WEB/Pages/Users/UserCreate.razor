@@ -1,0 +1,42 @@
+﻿@page "/users/create"
+@inject IRepository repository
+@inject NavigationManager navigationManager
+@inject SweetAlertService sweetAlertService
+
+<h3>Agregar Usuario</h3>
+
+<UserForm @ref="userForm" User="user" OnValidSubmit="Create" ReturnAction="Return" />
+
+@code {
+    private User? user = new();
+    private UserForm? userForm;
+
+    private async Task Create()
+    {
+        var responseHttp = await repository.Post("/api/users", user);
+        if (responseHttp.Error)
+        {
+            var message = await responseHttp.GetErrorMessageAsync();
+            var Icon = SweetAlertIcon.Error;
+            await sweetAlertService.FireAsync("Error", message, Icon);
+            return;
+        }
+        else
+        {
+            userForm!.FormPostedSuccessfully = true;
+            await sweetAlertService.FireAsync(new SweetAlertOptions
+                {
+                    Title = "Completado",
+                    Text = "Se ha agregado el usuario con éxito",
+                    Icon = SweetAlertIcon.Success,
+                    ShowCancelButton = false
+                });
+            navigationManager.NavigateTo("/users");
+        }
+    }
+
+    private void Return()
+    {
+        navigationManager.NavigateTo("/users");
+    }
+}

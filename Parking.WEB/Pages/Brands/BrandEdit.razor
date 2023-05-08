@@ -1,0 +1,66 @@
+﻿@page "/brands/edit/{Id:int}"
+@inject NavigationManager navigationManager
+@inject IRepository repository
+@inject SweetAlertService swal
+
+<h3>Editar Marcas</h3>
+
+@if (brand is null)
+{
+    <img src="https://upload.wikimedia.org/wikipedia/commons/b/b1/Loading_icon.gif?20151024034921" />
+}
+else
+{
+    <BrandForm @ref="brandform" Brand="brand" OnValidSubmit="Edit" ReturnAction="Return" />
+}
+
+@code {
+    private Brand? brand;
+    private BrandForm? brandform;
+
+    [Parameter]
+    public int Id { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        var responseHTTP = await repository.Get<Brand>($"api/brands/{Id}");
+
+        if (responseHTTP.Error)
+        {
+            if (responseHTTP.HttpResponseMessage.StatusCode == System.Net.HttpStatusCode.NotFound)
+            {
+                navigationManager.NavigateTo("brands");
+            }
+            else
+            {
+                var messageError = await responseHTTP.GetErrorMessageAsync();
+                await swal.FireAsync("Error", messageError, SweetAlertIcon.Error);
+            }
+        }
+        else
+        {
+            brand = responseHTTP.Response;
+        }
+    }
+
+    private async Task Edit()
+    {
+        var responseHTTP = await repository.Put("api/brands", brand);
+
+        if (responseHTTP.Error)
+        {
+            var mensajeError = await responseHTTP.GetErrorMessageAsync();
+            await swal.FireAsync("Error", mensajeError, SweetAlertIcon.Error);
+        }
+        else
+        {
+            brandform!.FormPostedSuccessfully = true;
+            navigationManager.NavigateTo("brands");
+        }
+    }
+
+    private void Return()
+    {
+        navigationManager.NavigateTo("brands");
+    }
+}

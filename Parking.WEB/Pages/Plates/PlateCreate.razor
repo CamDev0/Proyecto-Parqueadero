@@ -1,0 +1,44 @@
+﻿@page "/plates/create"
+
+@inject IRepository repository
+@inject NavigationManager navigationManager
+@inject SweetAlertService sweetAlertService
+
+<h3>Ingresar nueva placa</h3>
+
+<PlateForm @ref="plateform" Plate="plate" OnValidSubmit="Create" ReturnAction="Return" />
+
+@code {
+    private Plate plate= new();
+    private PlateForm? plateform;
+
+    private async Task Create()
+    {
+        var responseHttp = await repository.Post("/api/plates", plate);
+        if (responseHttp.Error)
+        {
+            var message = await responseHttp.GetErrorMessageAsync();
+            var Icon = SweetAlertIcon.Error;
+            await sweetAlertService.FireAsync("Error", message, Icon);
+            return;
+        }
+        else
+        {
+            plateform!.FormPostedSuccessfully = true;
+            await sweetAlertService.FireAsync(new SweetAlertOptions
+                {
+                    Title = "Completado",
+                    Text = "Se ha agregado la placa con éxito",
+                    Icon = SweetAlertIcon.Success,
+                    ShowCancelButton = false
+                });
+            navigationManager.NavigateTo("/plates");
+        }
+
+    }
+
+    private void Return()
+    {
+        navigationManager.NavigateTo("/plates");
+    }
+}
