@@ -1,35 +1,35 @@
-﻿@page "/users/edit/{Id:int}"
+﻿@page "/owners/edit/{Id:int}"
 @inject NavigationManager navigationManager
 @inject IRepository repository
 @inject SweetAlertService swal
 
-<h3>Editar Registro</h3>
+<h3>Editar Propietario</h3>
 
-@if (user is null)
+@if (owner is null)
 {
     <img src="https://upload.wikimedia.org/wikipedia/commons/b/b1/Loading_icon.gif?20151024034921" />
 }
 else
 {
-    <UserForm @ref="userForm" User="user" OnValidSubmit="Edit" ReturnAction="Return" />
+    <OwnerForm @ref="ownerForm" Owner="owner" OnValidSubmit="Edit" ReturnAction="Return" />
 }
 
 @code {
-    private User? user;
-    private UserForm? userForm;
+    private Owner? owner;
+    private OwnerForm? ownerForm;
 
     [Parameter]
     public int Id { get; set; }
 
     protected override async Task OnInitializedAsync()
     {
-        var responseHTTP = await repository.Get<User>($"api/users/{Id}");
+        var responseHTTP = await repository.Get<Owner>($"api/owners/{Id}");
 
         if (responseHTTP.Error)
         {
             if (responseHTTP.HttpResponseMessage.StatusCode == System.Net.HttpStatusCode.NotFound)
             {
-                navigationManager.NavigateTo("users");
+                navigationManager.NavigateTo("owners");
             }
             else
             {
@@ -39,13 +39,13 @@ else
         }
         else
         {
-            user = responseHTTP.Response;
+            owner = responseHTTP.Response;
         }
     }
 
     private async Task Edit()
     {
-        var responseHTTP = await repository.Put("api/users", user);
+        var responseHTTP = await repository.Put("api/owners", owner);
 
         if (responseHTTP.Error)
         {
@@ -54,13 +54,13 @@ else
         }
         else
         {
-            userForm!.FormPostedSuccessfully = true;
-            navigationManager.NavigateTo("users");
+            ownerForm!.FormPostedSuccessfully = true;
+            navigationManager.NavigateTo("owners");
         }
     }
 
     private void Return()
     {
-        navigationManager.NavigateTo("users");
+        navigationManager.NavigateTo("owners");
     }
 }

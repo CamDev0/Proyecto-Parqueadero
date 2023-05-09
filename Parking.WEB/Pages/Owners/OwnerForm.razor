@@ -5,16 +5,16 @@
 
     <DataAnnotationsValidator />
     <div class="mb-3">
-        <label>Usuario:</label>
+        <label>Propietario:</label>
         <div>
-            <InputText class="form-control" @bind-Value="@User.Name" />
-            <ValidationMessage For="@(() => User.Name)" />
+            <InputText class="form-control" @bind-Value="@Owner.Name" />
+            <ValidationMessage For="@(() => Owner.Name)" />
         </div>
         <br />
         <label>Identificación:</label>
         <div>
-            <InputText class="form-control" @bind-Value="@User.IDUser" />
-            <ValidationMessage For="@(() => User.IDUser)" />
+            <InputText class="form-control" @bind-Value="@Owner.IDOwner" />
+            <ValidationMessage For="@(() => Owner.IDOwner)" />
         </div>
     </div>
 
@@ -28,13 +28,13 @@
 
     protected override void OnInitialized()
     {
-        editContext = new(User);
+        editContext = new(Owner);
     }
 
 
     [EditorRequired]
     [Parameter]
-    public User User { get; set; } = null!;
+    public Owner Owner { get; set; } = null!;
 
     [EditorRequired]
     [Parameter]

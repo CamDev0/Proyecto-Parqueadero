@@ -7,21 +7,20 @@ using System.Threading.Tasks;
 
 namespace Parking.Shared.Entities
 {
-    public class User
+    public class Owner
     {
 
         public int Id { get; set; }
 
-        [Display(Name = "Usuario")]  //{0}
+        [Display(Name = "Propietario")]  //{0}
         [MaxLength(100, ErrorMessage = "Cuidado el campo {0} no permite más de {1} caracteres ")]  //{1}
         [Required(ErrorMessage = "El campo {0} es obligatorio")]
         public string Name { get; set; } = null;
 
-        [Display(Name = "ID Usuario")]  //{0}
+        [Display(Name = "ID Propietario")]  //{0}
         [MaxLength(100, ErrorMessage = "Cuidado el campo {0} no permite más de {1} caracteres ")]  //{1}
         [Required(ErrorMessage = "El campo {0} es obligatorio")]
-        public string IDUser { get; set; } = null;
-
+        public string IDOwner { get; set; } = null;
 
     }
 }

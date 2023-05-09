@@ -9,13 +9,13 @@ namespace Parking.API.Controllers
 {
 
     [ApiController]
-    [Route("/api/users")]
-    public class UsersController : ControllerBase
+    [Route("/api/owners")]
+    public class OwnersController : ControllerBase
     {
         private readonly DataContext _context;
 
 
-        public UsersController(DataContext context)
+        public OwnersController(DataContext context)
         {
             _context = context;
         }
@@ -28,7 +28,7 @@ namespace Parking.API.Controllers
         [HttpGet]
         public async Task<IActionResult> GetAsync([FromQuery] PaginationDTO pagination)
         {
-            var queryable = _context.Users
+            var queryable = _context.Owners
                 .AsQueryable();
 
             if (!string.IsNullOrWhiteSpace(pagination.Filter))
@@ -46,7 +46,7 @@ namespace Parking.API.Controllers
         [HttpGet("totalPages")]
         public async Task<ActionResult> GetPages([FromQuery] PaginationDTO pagination)
         {
-            var queryable = _context.Users.AsQueryable();
+            var queryable = _context.Owners.AsQueryable();
 
             if (!string.IsNullOrWhiteSpace(pagination.Filter))
             {
@@ -64,27 +64,27 @@ namespace Parking.API.Controllers
         [HttpGet("{id:int}")]
         public async Task<ActionResult> Get(int id)
         {
-            var user = await _context.Users.FirstOrDefaultAsync(x => x.Id == id);
-            if (user is null)
+            var owner = await _context.Owners.FirstOrDefaultAsync(x => x.Id == id);
+            if (owner is null)
             {
                 return NotFound();
             }
 
-            return Ok(user);
+            return Ok(owner);
         }
 
 
         //CREAR - Permite agregar un país de forma asíncrona
 
         [HttpPost]
-        public async Task<ActionResult> Post(User user)
+        public async Task<ActionResult> Post(Owner owner)
         {
-            _context.Add(user);
+            _context.Add(owner);
             try
             {
 
                 await _context.SaveChangesAsync();
-                return Ok(user);
+                return Ok(owner);
             }
             catch (DbUpdateException dbUpdateException)
             {
@@ -109,13 +109,13 @@ namespace Parking.API.Controllers
         //UPDATE
 
         [HttpPut]
-        public async Task<ActionResult> Put(User user)
+        public async Task<ActionResult> Put(Owner owner)
         {
-            _context.Update(user);
+            _context.Update(owner);
             try
             {
                 await _context.SaveChangesAsync();
-                return Ok(user);
+                return Ok(owner);
 
             }
             catch (DbUpdateException dbUpdateException)
@@ -140,7 +140,7 @@ namespace Parking.API.Controllers
         [HttpDelete("{id:int}")]
         public async Task<ActionResult> Delete(int id)
         {
-            var afectedRows = await _context.Users
+            var afectedRows = await _context.Owners
                 .Where(x => x.Id == id)
                 .ExecuteDeleteAsync();
 

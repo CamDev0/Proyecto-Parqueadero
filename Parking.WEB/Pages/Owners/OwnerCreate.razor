@@ -1,19 +1,19 @@
-﻿@page "/users/create"
+﻿@page "/owners/create"
 @inject IRepository repository
 @inject NavigationManager navigationManager
 @inject SweetAlertService sweetAlertService
 
-<h3>Agregar Usuario</h3>
+<h3>Agregar Propietario</h3>
 
-<UserForm @ref="userForm" User="user" OnValidSubmit="Create" ReturnAction="Return" />
+<OwnerForm @ref="ownerForm" Owner="owner" OnValidSubmit="Create" ReturnAction="Return" />
 
 @code {
-    private User? user = new();
-    private UserForm? userForm;
+    private Owner? owner = new();
+    private OwnerForm? ownerForm;
 
     private async Task Create()
     {
-        var responseHttp = await repository.Post("/api/users", user);
+        var responseHttp = await repository.Post("/api/owners", owner);
         if (responseHttp.Error)
         {
             var message = await responseHttp.GetErrorMessageAsync();
@@ -23,7 +23,7 @@
         }
         else
         {
-            userForm!.FormPostedSuccessfully = true;
+            ownerForm!.FormPostedSuccessfully = true;
             await sweetAlertService.FireAsync(new SweetAlertOptions
                 {
                     Title = "Completado",
@@ -31,12 +31,12 @@
                     Icon = SweetAlertIcon.Success,
                     ShowCancelButton = false
                 });
-            navigationManager.NavigateTo("/users");
+            navigationManager.NavigateTo("/owners");
         }
     }
 
     private void Return()
     {
-        navigationManager.NavigateTo("/users");
+        navigationManager.NavigateTo("/owners");
     }
 }

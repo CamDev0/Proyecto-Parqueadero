@@ -11,7 +11,7 @@ namespace Parking.API.Data
             
         }
        
-        public DbSet<User> Users { get; set; }
+        public DbSet<Owner> Owners { get; set; }
 
         public DbSet<Brand> Brands { get; set; }
 
@@ -21,7 +21,7 @@ namespace Parking.API.Data
             base.OnModelCreating(modelBuilder);
 
             //Hace que cada columna sea únicos
-            modelBuilder.Entity<User>().HasIndex(c => c.Name).IsUnique();
+            modelBuilder.Entity<Owner>().HasIndex(c => c.IDOwner).IsUnique();
             modelBuilder.Entity<Brand>().HasIndex(c => c.Name).IsUnique();
             modelBuilder.Entity<Plate>().HasIndex(c => c.Name).IsUnique();
         }

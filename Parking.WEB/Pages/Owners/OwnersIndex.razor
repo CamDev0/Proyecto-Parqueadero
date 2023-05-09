@@ -1,19 +1,19 @@
-﻿@page "/users"
+﻿@page "/owners"
 @inject NavigationManager navigationManager
 @inject SweetAlertService swal
 @inject IRepository repository
 
-<h3>Usuarios</h3>
-
+<h3>Propietarios</h3>
 
 <div class="mb-3">
-    <a class="btn btn-primary" href="/users/create">Nuevo Usuario</a>
+    <a class="btn btn-primary" href="/owners/create">Nuevo Propietario</a>
+    <a class="btn btn-success" href="/">Regresar</a>
 </div>
 
 <div class="mb-2" style="display: flex; flex-wrap:wrap; align-items: center;">
 
     <div class="mx-2">
-        <input style="width: 400px;" type="text" class="form-control" id="titulo" placeholder="Buscar usuario por nombre..." @bind-value="Filter" />
+        <input style="width: 400px;" type="text" class="form-control" id="titulo" placeholder="Buscar por nombre..." @bind-value="Filter" />
     </div>
     <div>
         <button type="button" class="btn btn-outline-primary" @onclick="ApplyFilterAsync">Filtrar</button>
@@ -25,30 +25,30 @@
             TotalPages="totalPages"
             SelectedPage="SelectedPage" />
 
-<GenericList MyList="Users">
+<GenericList MyList="Owners">
 
     <Body>
         <table class="table table-striped">
             <thead>
                 <tr>
-                    <th style="width:300px">Usuario</th>
-                    <th style="width:300px">ID Usuario</th>
+                    <th style="width:300px">Propietario</th>
+                    <th style="width:300px">Identificación</th>
                     <th style="width:210px">Edit/Delete</th>
                 </tr>
             </thead>
             <tbody>
-                @foreach (var user in Users!)
+                @foreach (var owner in Owners!)
                 {
                     <tr>
                         <td>
-                            @user.Name
+                            @owner.Name
                         </td>
                         <td>
-                            @user.IDUser
+                            @owner.IDOwner
                         </td>
                         <td>
-                            <a href="/users/edit/@user.Id" class="btn btn-warning">Editar</a>
-                            <button class="btn btn-danger" @onclick=@(() => Delete(user))>Borrar</button>
+                            <a href="/owners/edit/@owner.Id" class="btn btn-warning">Editar</a>
+                            <button class="btn btn-danger" @onclick=@(() => Delete(owner))>Borrar</button>
                         </td>
                     </tr>
                 }
@@ -60,7 +60,7 @@
 </GenericList>
 
 @code {
-    public List<User>? Users { get; set; }
+    public List<Owner>? Owners { get; set; }
     private int currentPage = 1;
     private int totalPages;
 
@@ -98,24 +98,24 @@
 
         if (string.IsNullOrEmpty(Filter))
         {
-            url1 = $"api/users?page={page}";
-            url2 = $"api/users/totalPages";
+            url1 = $"api/owners?page={page}";
+            url2 = $"api/owners/totalPages";
         }
         else
         {
-            url1 = $"api/users?page={page}&filter={Filter}";
-            url2 = $"api/users/totalPages?filter={Filter}";
+            url1 = $"api/owners?page={page}&filter={Filter}";
+            url2 = $"api/owners/totalPages?filter={Filter}";
         }
 
 
-        var responseHppt = await repository.Get<List<User>>(url1);
+        var responseHppt = await repository.Get<List<Owner>>(url1);
         var responseHppt2 = await repository.Get<int>(url2);
-        Users = responseHppt.Response!;
+        Owners = responseHppt.Response!;
         totalPages = responseHppt2.Response!;
 
     }
 
-    private async Task Delete(User user)
+    private async Task Delete(Owner owner)
     {
         var result = await swal.FireAsync(new SweetAlertOptions
             {
@@ -132,7 +132,7 @@
             return;
         }
 
-        var responseHTTP = await repository.Delete($"api/users/{user.Id}");
+        var responseHTTP = await repository.Delete($"api/owners/{owner.Id}");
 
         if (responseHTTP.Error)
         {
