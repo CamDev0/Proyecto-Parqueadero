@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using Parking.Shared.DTOs;
 using Parking.Shared.Entities;
 
 namespace Parking.API.Helpers
@@ -14,6 +15,11 @@ namespace Parking.API.Helpers
         Task AddUserToRoleAsync(User user, string roleName);
 
         Task<bool> IsUserInRoleAsync(User user, string roleName);
+
+        Task<SignInResult> LoginAsync(LoginDTO model);
+
+        Task LogoutAsync();
+
     }
 
 }
