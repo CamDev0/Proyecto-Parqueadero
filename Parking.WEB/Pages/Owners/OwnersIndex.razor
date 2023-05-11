@@ -1,7 +1,9 @@
 ﻿@page "/owners"
+@using Microsoft.AspNetCore.Authorization;
 @inject NavigationManager navigationManager
 @inject SweetAlertService swal
 @inject IRepository repository
+@attribute [Authorize(Roles = "Admin")]
 
 <h3>Propietarios</h3>
 

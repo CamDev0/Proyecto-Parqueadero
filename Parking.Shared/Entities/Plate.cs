@@ -24,5 +24,7 @@ namespace Parking.Shared.Entities
         [Required(ErrorMessage = "El campo {0} es obligatorio")]
         public string Owner { get; set; } = null;
 
+        public Owner? OwnerFK { get; set; }
+
     }
 }

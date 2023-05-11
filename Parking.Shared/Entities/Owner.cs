@@ -22,5 +22,6 @@ namespace Parking.Shared.Entities
         [Required(ErrorMessage = "El campo {0} es obligatorio")]
         public string IDOwner { get; set; } = null;
 
+        public ICollection<Plate>? PlatePK { get; set; }
     }
 }

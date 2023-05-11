@@ -1,5 +1,10 @@
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 using Parking.API.Data;
+using Parking.API.Helpers;
+using Parking.API.Services;
+using Parking.Shared.Entities;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -16,6 +21,21 @@ builder.Services.AddDbContext<DataContext> (x => x.UseSqlServer("name=DefaultCon
 
 builder.Services.AddTransient<SeedDB>();
 
+builder.Services.AddScoped<IApiService, ApiService>();
+
+builder.Services.AddIdentity<User, IdentityRole>(x =>
+{
+    x.User.RequireUniqueEmail = true;
+    x.Password.RequireDigit = false;
+    x.Password.RequiredUniqueChars = 0;
+    x.Password.RequireLowercase = false;
+    x.Password.RequireNonAlphanumeric = false;
+    x.Password.RequireUppercase = false;
+})
+    .AddEntityFrameworkStores<DataContext>()
+    .AddDefaultTokenProviders();
+
+builder.Services.AddScoped<IUserHelper, UserHelper>();
 
 
 var app = builder.Build();
@@ -40,7 +60,7 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
