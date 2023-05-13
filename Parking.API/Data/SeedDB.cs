@@ -24,7 +24,7 @@ namespace Parking.API.Data
             await _context.Database.EnsureCreatedAsync();
             await CheckBrandsAsync();
             await CheckRolesAsync();
-            await CheckUserAsync("1", "OAP", "OAP", "oap@yopmail.com", "300445555", "CR 78 9687", UserType.Admin);
+            await CheckUserAsync("1", "ADMIN", "ADMIN", "admin@yopmail.com", "3204356789", "CR 24 #50B - 2", UserType.Admin);
 
         }
 
@@ -45,7 +45,7 @@ namespace Parking.API.Data
                     UserType = userType,
                 };
 
-                await _userHelper.AddUserAsync(user, "123456");
+                await _userHelper.AddUserAsync(user, "admin1234*");
                 await _userHelper.AddUserToRoleAsync(user, userType.ToString());
             }
 

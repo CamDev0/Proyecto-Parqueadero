@@ -11,9 +11,9 @@ namespace Parking.WEB.Auth
             var anonimous = new ClaimsIdentity();
             var oapUser = new ClaimsIdentity(new List<Claim>
             {
-            new Claim("FirstName", "Luis"),
-            new Claim("LastName", "O"),
-            new Claim(ClaimTypes.Name, "oap@yopmail.com"),
+            new Claim("FirstName", "Camilo"),
+            new Claim("LastName", "Barrios"),
+            new Claim(ClaimTypes.Name, "admin@yopmail.com"),
             new Claim(ClaimTypes.Role, "Admin")
             },
             authenticationType: "test");

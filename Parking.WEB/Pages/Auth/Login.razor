@@ -25,7 +25,8 @@
                     <ValidationMessage For="@(() => loginDTO.Password)" />
                 </div>
             </div>
-            <button class="btn btn-primary" type="submit">Iniciar Sesión</button>
+            <button class="btn btn-primary" href="../Principal" type="submit">Iniciar Sesión</button>
+            <a class="btn btn-success" href="/">Regresar</a>
         </div>
     </div>
 </EditForm>
@@ -44,6 +45,6 @@
         }
 
         await loginService.LoginAsync(responseHttp.Response!.Token);
-        navigationManager.NavigateTo("/");
+        navigationManager.NavigateTo("/principal");
     }
 }
