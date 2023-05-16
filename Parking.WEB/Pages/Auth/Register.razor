@@ -9,6 +9,18 @@
 <EditForm Model="userDTO" OnValidSubmit="CreteUserAsync">
     <DataAnnotationsValidator />
 
+    <div class="card">
+        <div class="card-header">
+            <span>
+                <i class="oi oi-person" /> Registrar Nuevo  Usuario
+                <a class="btn btn-sm btn-success float-end" href="/">Regresar</a>
+                <a class="float-end"> . </a>
+                <button class="btn btn-sm btn-primary float-end" type="submit"><i class="oi oi-check" /> Registrar</button>
+            </span>
+        </div>
+        <div class="card-body">
+
+
     <div class="row">
         <div class="col-6">
             <div class="mb-3">
@@ -76,14 +88,19 @@
                     <ValidationMessage For="@(() => userDTO.PasswordConfirm)" />
                 </div>
             </div>
+            <div class="mb-3">
+                <InputImg Label="Foto" ImageSelected="ImageSelected" ImageURL="@imageUrl" />
+            </div>
+
         </div>
     </div>
-    <button class="btn btn-primary" type="submit">Registrar</button>
-    <a class="btn btn-success" href="/">Regresar</a>
+    </div>
+    </div>
 </EditForm>
 
 @code {
     private UserDTO userDTO = new();
+    private string? imageUrl;
 
     private async Task CreteUserAsync()
     {
@@ -100,4 +117,21 @@
         await loginService.LoginAsync(responseHttp.Response!.Token);
         navigationManager.NavigateTo("/");
     }
+
+    protected override async Task OnInitializedAsync()
+    {
+
+        if (!string.IsNullOrEmpty(userDTO.Photo))
+    {
+        imageUrl = userDTO.Photo;
+        userDTO.Photo = null;
+    }
+}
+
+    private void ImageSelected(string imagenBase64)
+    {
+        userDTO.Photo = imagenBase64;
+        imageUrl = null;
+    }
+
 }
