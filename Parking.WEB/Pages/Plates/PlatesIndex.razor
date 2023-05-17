@@ -10,10 +10,10 @@
             <div class="card">
                 <div class="card-header">
                     <span>
-                        <i class="oi oi-globe"></i> Placas
-                    <a class="btn btn-sm btn-outline-success float-end" href="/principal">Regresar</a>
+            <i class="bi bi-displayport"></i> Placas
+            <a class="btn btn-sm btn-outline-success float-end" href="/principal" <i class="bi bi-backspace-fill"></i> Regresar</a>
                         <a class="float-end"> . </a>
-                    <a class="btn btn-sm btn-outline-primary float-end" href="/plates/create"><i class="oi oi-plus"></i> Agregar Placa</a>
+            <a class="btn btn-sm btn-outline-primary float-end" href="/plates/create"><i class="bi bi-plus-circle-fill"></i> Agregar Placa</a>
                     </span>
                 </div>
                 <div class="card-body">
@@ -22,8 +22,8 @@
                             <input style="width: 400px;" type="text" class="form-control" id="titulo" placeholder="Buscar placa..." @bind-value="Filter" />
                         </div>
                         <div class="mx-1">
-                            <button type="button" class="btn btn-outline-primary" @onclick="ApplyFilterAsync"><i class="oi oi-layers" /> Filtrar</button>
-                            <button type="button" class="btn btn-outline-danger" @onclick="CleanFilterAsync"><i class="oi oi-ban" /> Limpiar</button>
+                <button type="button" class="btn btn-outline-primary" @onclick="ApplyFilterAsync"><i class="bi bi-filter"></i> Filtrar</button>
+                <button type="button" class="btn btn-outline-danger" @onclick="CleanFilterAsync"><i class="bi bi-x"></i> Limpiar</button>
                         </div>
                     </div>
                 </div>
@@ -61,8 +61,8 @@ else
                             @plate.Owner
                         </td>
                         <td>
-                            <a href="/plates/edit/@plate.Id" class="btn btn-warning">Editar</a>
-                            <button class="btn btn-danger" @onclick=@(() => Delete(plate))>Borrar</button>
+                                <a href="/plates/edit/@plate.Id" class="btn btn-warning"><i class="bi bi-pen"></i> Editar</a>
+                                <button class="btn btn-danger" @onclick=@(() => Delete(plate))><i class="bi bi-trash-fill"></i> Borrar</button>
                         </td>
                     </tr>
                 }

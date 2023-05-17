@@ -10,10 +10,10 @@
             <div class="card">
                 <div class="card-header">
                     <span>
-                        <i class="oi oi-globe"></i> Propietarios
-                        <a class="btn btn-sm btn-outline-success float-end" href="/principal">Regresar</a>
+            <i class="bi bi-file-person"></i> Propietarios
+            <a class="btn btn-sm btn-outline-success float-end" href="/principal" <i class="bi bi-backspace-fill"></i>  Regresar</a>
                         <a class="float-end"> . </a>
-                        <a class="btn btn-sm btn-outline-primary float-end" href="/owners/create"><i class="oi oi-plus"></i> Agregar Propietario</a>
+            <a class="btn btn-sm btn-outline-primary float-end" href="/owners/create"><i class="bi bi-plus-circle-fill"></i>  Agregar Propietario</a>
                     </span>
                 </div>
                 <div class="card-body">
@@ -22,8 +22,8 @@
                             <input style="width: 400px;" type="text" class="form-control" id="titulo" placeholder="Buscar propietario..." @bind-value="Filter" />
                         </div>
                         <div class="mx-1">
-                            <button type="button" class="btn btn-outline-primary" @onclick="ApplyFilterAsync"><i class="oi oi-layers" /> Filtrar</button>
-                            <button type="button" class="btn btn-outline-danger" @onclick="CleanFilterAsync"><i class="oi oi-ban" /> Limpiar</button>
+                <button type="button" class="btn btn-outline-primary" @onclick="ApplyFilterAsync"><i class="bi bi-filter"></i> Filtrar</button>
+                <button type="button" class="btn btn-outline-danger" @onclick="CleanFilterAsync"><i class="bi bi-x"></i> Limpiar</button>
                         </div>
                     </div>
                  </div>
@@ -62,8 +62,8 @@ else
                             @owner.IDOwner
                         </td>
                         <td>
-                            <a href="/owners/edit/@owner.Id" class="btn btn-warning">Editar</a>
-                            <button class="btn btn-danger" @onclick=@(() => Delete(owner))>Borrar</button>
+                                <a href="/owners/edit/@owner.Id" class="btn btn-warning"><i class="bi bi-pen"></i> Editar</a>
+                                <button class="btn btn-danger" @onclick=@(() => Delete(owner))><i class="bi bi-trash-fill"></i> Borrar</button>
                         </td>
                     </tr>
                 }

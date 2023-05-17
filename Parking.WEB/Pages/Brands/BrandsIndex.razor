@@ -9,10 +9,10 @@
             <div class="card">
                 <div class="card-header" >
                     <span>
-                        <i class="oi oi-globe"></i> Marcas
-                        <a class="btn btn-sm btn-outline-success float-end" href="/principal">Regresar</a>
+            <i class="bi bi-bookmark-dash-fill"></i> Marcas
+            <a class="btn btn-sm btn-outline-success float-end" href="/principal" <i class="bi bi-backspace-fill"></i> Regresar</a>
                         <a class="float-end"> . </a>
-                        <a class="btn btn-sm btn-outline-primary float-end" href="/brands/create"><i class="oi oi-plus"></i> Agregar Marca</a>
+            <a class="btn btn-sm btn-outline-primary float-end" href="/brands/create"><i class="bi bi-plus-circle-fill"></i> Agregar Marca</a>
                     </span>
                 </div>
                 <div class="card-body">
@@ -21,8 +21,8 @@
                             <input style="width: 400px;" type="text" class="form-control" id="titulo" placeholder="Buscar marca..." @bind-value="Filter" />
                         </div>
                         <div class="mx-1">
-                            <button type="button" class="btn btn-outline-primary" @onclick="ApplyFilterAsync"><i class="oi oi-layers" /> Filtrar</button>
-                            <button type="button" class="btn btn-outline-danger" @onclick="CleanFilterAsync"><i class="oi oi-ban" /> Limpiar</button>
+                <button type="button" class="btn btn-outline-primary" @onclick="ApplyFilterAsync"><i class="bi bi-filter"></i> Filtrar</button>
+                <button type="button" class="btn btn-outline-danger" @onclick="CleanFilterAsync"><i class="bi bi-x"></i> Limpiar</button>
                         </div>
                     </div>
                 </div>
@@ -58,8 +58,8 @@ else
                                 @brand.Name
                             </td>
                             <td>
-                                <a href="/brands/edit/@brand.Id" class="btn btn-warning btn-sm ">"><i class="oi oi-pencil" />Editar</a>
-                                <button class="btn btn-danger btn-sm" @onclick=@(() => Delete(brand))><i class="oi oi-trash" /> Borrar</button>
+                                <a href="/brands/edit/@brand.Id" class="btn btn-warning btn-sm "><i class="bi bi-pen"></i> Editar</a>
+                                <button class="btn btn-danger btn-sm" @onclick=@(() => Delete(brand))><i class="bi bi-trash-fill"></i> Borrar</button>
 
                             </td>
                         </tr>
