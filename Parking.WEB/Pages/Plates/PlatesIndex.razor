@@ -7,30 +7,6 @@
 
 <h3>Placas</h3>
 
-@*<div class="mb-3">
-    <a class="btn btn-primary" href="/plates/create">Nueva Placa</a>
-    <a class="btn btn-success" href="/principal">Regresar</a>
-</div>
-
-<div class="mb-2" style="display: flex; flex-wrap:wrap; align-items: center;">
-
-    <div class="mx-2">
-        <input style="width: 400px;" type="text" class="form-control" id="titulo" placeholder="Buscar por N de placa..." @bind-value="Filter" />
-    </div>
-    <div>
-        <button type="button" class="btn btn-outline-primary" @onclick="ApplyFilterAsync">Filtrar</button>
-        <button type="button" class="btn btn-outline-danger" @onclick="CleanFilterAsync">Limpiar</button>
-    </div>
-</div>
-<br />
-
-<Pagination CurrentPage="currentPage"
-            TotalPages="totalPages"
-            SelectedPage="SelectedPage" />*@
-
-<GenericList MyList="Plates">
-
-    <Body>
             <div class="card">
                 <div class="card-header">
                     <span>
@@ -50,11 +26,22 @@
                             <button type="button" class="btn btn-outline-danger" @onclick="CleanFilterAsync"><i class="oi oi-ban" /> Limpiar</button>
                         </div>
                     </div>
+                </div>
+            </div>
+<br />
+<Pagination CurrentPage="currentPage"
+            TotalPages="totalPages"
+            SelectedPage="SelectedPage" />
 
-                    <Pagination CurrentPage="currentPage"
-                            TotalPages="totalPages"
-                            SelectedPage="SelectedPage" />
+@if (Plates is null)
+{
+    <div class="spinner"/>
+}
+else
+{
+<GenericList MyList="Plates">
 
+    <Body>
         <table class="table table-striped">
             <thead>
                 <tr>
@@ -81,12 +68,10 @@
                 }
             </tbody>
         </table>
-        </div>
-        </div>
     </Body>
  
 </GenericList>
-
+}
 @code {
     public List<Plate>? Plates { get; set; }
     private int currentPage = 1;

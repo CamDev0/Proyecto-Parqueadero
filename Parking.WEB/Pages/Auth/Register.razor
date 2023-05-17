@@ -122,16 +122,18 @@
     {
 
         if (!string.IsNullOrEmpty(userDTO.Photo))
-    {
-        imageUrl = userDTO.Photo;
-        userDTO.Photo = null;
+        {
+            imageUrl = userDTO.Photo;
+            userDTO.Photo = null;
+        }
     }
-}
 
     private void ImageSelected(string imagenBase64)
     {
         userDTO.Photo = imagenBase64;
         imageUrl = null;
     }
-
 }
+
+
+
