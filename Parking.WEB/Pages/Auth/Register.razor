@@ -115,7 +115,7 @@
         }
 
         await loginService.LoginAsync(responseHttp.Response!.Token);
-        navigationManager.NavigateTo("/");
+        navigationManager.NavigateTo("/principal");
     }
 
     protected override async Task OnInitializedAsync()
