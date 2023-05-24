@@ -3,7 +3,7 @@
 
 <AuthorizeView Roles="Admin">
     <Authorized>
-        <p>Estas autenticado y autorizado, @context.User.Identity?.Name</p>
+        <p>Estas autenticado y autorizado.</p>
     </Authorized>
 </AuthorizeView>
 
@@ -36,9 +36,9 @@
                     </Authorized>
                 </AuthorizeView>
 
-@*                <li><a class="nav-link scrollto" href="Login">Login</a></li>*@
                 <AuthorizeView>
                     <Authorized>
+                        <li><a class="nav-link scrollto" href="EditUser">Editar Usuario</a></li>
                         <li><a class="nav-link scrollto" href="Logout">Logout</a></li>
                     </Authorized>
                 </AuthorizeView>

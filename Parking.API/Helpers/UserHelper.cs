@@ -56,8 +56,8 @@ namespace Parking.API.Helpers
         public async Task<User> GetUserAsync(string email)
         {
             var user = await _context.Users
-                .FirstOrDefaultAsync(u => u.Email! == email);
-            return user!;
+                .FirstOrDefaultAsync(x => x.Email == email);
+            return user!;    
 
         }
 
@@ -65,6 +65,25 @@ namespace Parking.API.Helpers
         {
             return await _userManager.IsInRoleAsync(user, roleName);
         }
+
+
+        public async Task<User> GetUserAsync(Guid userId)
+        {
+            var user = await _context.Users
+                .FirstOrDefaultAsync(x => x.Id == userId.ToString());
+            return user!;
+        }
+
+        public async Task<IdentityResult> ChangePasswordAsync(User user, string currentPassword, string newPassword)
+        {
+            return await _userManager.ChangePasswordAsync(user, currentPassword, newPassword);
+        }
+
+        public async Task<IdentityResult> UpdateUserAsync(User user)
+        {
+            return await _userManager.UpdateAsync(user);
+        }
+
     }
 
 }
