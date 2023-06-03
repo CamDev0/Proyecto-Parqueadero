@@ -1,6 +1,8 @@
 # Proyecto-Parqueadero
 Proyecto de clases donde implementamos tecnologías de backend y frontend del entorno microsoft, tales como Blazor para el Web, .Net core 7 API como parte del back, Sql server con azure para la parte de bases de datos y almacenamiento en la nube.
 
+También se utilizó una plantilla e iconos de bootstrap, se inyectó sweet alert para sacar modales, alertas con una buena decoración y también JWT para encriptar los datos del usuario.
+
 1. Aquí podemos ver como están conformadas nuestras entidades, con todos sus métodos para el crud.
 
 
@@ -49,7 +51,7 @@ Proyecto de clases donde implementamos tecnologías de backend y frontend del en
 9. Editar usuario y cambiar contraseña.
 
 ![10  editar user](https://github.com/CamDev0/Proyecto-Parqueadero/assets/102267020/bad54f52-2a4c-4171-b270-3a1837e1642e)
-ed69)
+
 
 ![11  cambiar contraseña](https://github.com/CamDev0/Proyecto-Parqueadero/assets/102267020/3d8d7702-c9de-4e78-adf8-2631309200bd)
 
