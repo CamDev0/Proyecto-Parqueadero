@@ -22,14 +22,14 @@
             <div class="mb-3">
                 <label>Email:</label>
                 <div>
-                    <InputText class="form-control" @bind-Value="@loginDTO.Email" />
+                    <InputText class="form-control" @bind-Value="@loginDTO.Email" placeholder="admin@yopmail.com" />
                     <ValidationMessage For="@(() => loginDTO.Email)" />
                 </div>
             </div>
             <div class="mb-3">
                 <label>Contraseña:</label>
                 <div>
-                    <InputText type="password" class="form-control" @bind-Value="@loginDTO.Password" />
+                    <InputText type="password" class="form-control" @bind-Value="@loginDTO.Password" placeholder="admin1234*"/>
                     <ValidationMessage For="@(() => loginDTO.Password)" />
                 </div>
             </div>
